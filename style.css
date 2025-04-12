@@ -1,0 +1,102 @@
+/* Allgemeine Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-image: url('bg.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      overflow-x: hidden;
+      background-attachment: fixed; /* Fixiere den Hintergrund */
+    }
+
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.5); /* Transparente schwarze Hintergrund */
+      text-align: center;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      padding: 10px 20px;
+      border-radius: 30px;
+      background-color: rgba(0, 0, 0, 0.7);
+      transition: background-color 0.3s;
+    }
+
+    nav a:hover {
+      background-color: rgba(0, 0, 0, 0.9);
+      text-decoration: underline;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.5); /* Transparente schwarze Überlagerung */
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      color: #fff;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    }
+
+    .scroll-text {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s, transform 1s;
+      margin-top: 30px;
+    }
+
+    .show-scroll-text {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Video */
+    iframe {
+      width: 100%;
+      max-width: 560px;
+      height: 315px;
+      border: none;
+      margin-top: 20px;
+    }
+
+    footer {
+      background-color: rgba(0, 0, 0, 0.7);
+      text-align: center;
+      color: white;
+      padding: 20px;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      nav a {
+        font-size: 1rem;
+      }
+    }

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT News DE</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>IT News DE</h1>
+    <nav>
+      <a href="index.html">Startseite</a> <!-- Link zur Startseite -->
+      <a href="kontakt.html">Kontakt</a> <!-- Weiterleitung zur Kontaktseite -->
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div>
+      <h1>Willkommen bei IT News DE!</h1>
+      <div class="scroll-text">
+        <h2>Schau dir das neueste Video an!</h2>
+        <div id="video-container">
+          <!-- Das neueste Video wird hier eingebunden -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Weitere Inhalte, die beim Scrollen erscheinen -->
+  <section>
+    <div class="scroll-text">
+      <h3>Hey Ich versuche wenn es etwas neues oder wichtiges gibt ein neues Video zu machen.</h3>
+    </div>
+    <div class="scroll-text">
+      <h3>Kommt noch</h3>
+    </div>
+  </section>
+
+  <footer>
+    <p>Kontakt: info@itnewsde.com</p>
+  </footer>
+
+  <script>
+    // YouTube API-URL und Kanal-ID
+    const apiKey = 'AIzaSyBjTLdPrq3QfRiHZEjVKuigdEHVffBO5YM'; // Ersetze mit deinem YouTube Data API v3 Schlüssel
+    const channelId = 'UCfH-DCEH2LOaxvOXs3heiDQ'; // Ersetze mit der Kanal-ID des gewünschten YouTube-Kanals
+
+    // Funktion, um das neueste Video vom Kanal abzurufen
+    async function fetchLatestVideo() {
+      const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&order=date&part=snippet&type=video&maxResults=1`;
+      
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      
+      if (data.items.length > 0) {
+        const latestVideo = data.items[0];
+        const videoId = latestVideo.id.videoId;
+        const videoEmbed = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        document.getElementById('video-container').innerHTML = videoEmbed;
+      } else {
+        console.log('Kein Video gefunden!');
+      }
+    }
+
+    // Lade das neueste Video beim Laden der Seite
+    window.onload = function() {
+      fetchLatestVideo();
+    };
+
+    // Funktion, die überprüft, ob die .scroll-text-Elemente im Sichtbereich sind
+    function checkScrollText() {
+      const scrollTexts = document.querySelectorAll('.scroll-text');
+      scrollTexts.forEach((text) => {
+        const rect = text.getBoundingClientRect();
+        if (rect.top <= window.innerHeight && rect.bottom >= 0) {
+          text.classList.add('show-scroll-text');
+        }
+      });
+    }
+
+    // Event Listener für das Scrollen
+    window.addEventListener('scroll', checkScrollText);
+
+    // Initialer Check beim Laden der Seite
+    window.onload = function() {
+      fetchLatestVideo();
+      checkScrollText(); // Sicherstellen, dass die Texte beim ersten Laden angezeigt werden
+    };
+  </script>
+
+</body>
+</html>
